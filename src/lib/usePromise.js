@@ -11,7 +11,6 @@ export default function usePromise(promiseCreator, deps) {
       setLoading(true);
       try {
         const resolved = await promiseCreator();
-        console.log(resolved);
         setResolved(resolved);
       } catch (e) {
         setError(e);
