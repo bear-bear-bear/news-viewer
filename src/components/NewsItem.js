@@ -3,14 +3,16 @@ import styled from 'styled-components';
 
 const NewsItemBlock = styled.div`
   display: flex;
+  border-top: 1px solid #aaa;
+  padding-top: 1rem;
 
   .thumbnail {
     margin-right: 1rem;
 
     img {
       display: block;
-      width: 160px;
-      height: 100px;
+      width: 15rem;
+      height: 10rem;
       object-fit: cover;
     }
   }
@@ -32,6 +34,18 @@ const NewsItemBlock = styled.div`
 
   & + & {
     margin-top: 3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    .thumbnail {
+      img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 0.66rem;
+      }
+    }
   }
 `;
 

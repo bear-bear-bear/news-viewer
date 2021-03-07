@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 import NewsItem from './NewsItem';
 import usePromise from '../lib/usePromise';
@@ -8,15 +8,30 @@ const NewsListBlock = styled.div`
   box-sizing: border-box;
   padding-bottom: 3rem;
   width: 768px;
-  margin: 0 auto;
+  min-height: fit-content;
   margin-top: 2rem;
 
   @media screen and (max-width: 768px) {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
+    margin-top: initial;
   }
 `;
+
+const FloatedCenterBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Loading = styled.p``;
 
 const NewsList = ({ category }) => {
   const [loading, response, error] = usePromise(() => {
@@ -28,7 +43,13 @@ const NewsList = ({ category }) => {
 
   // 1. 대기 중일 때
   if (loading) {
-    return <NewsListBlock>대기 중...</NewsListBlock>;
+    return (
+      <NewsListBlock>
+        <FloatedCenterBox>
+          <Loading>대기 중...</Loading>
+        </FloatedCenterBox>
+      </NewsListBlock>
+    );
   }
   // 2. 아직 articles 값이 설정되지 않았을 때
   if (!response) {

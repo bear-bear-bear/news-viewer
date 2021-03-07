@@ -20,7 +20,8 @@ const CategoriesBlock = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -47,6 +48,15 @@ const Category = styled(NavLink)`
 
   & + & {
     margin-left: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.33rem;
+
+    & + & {
+      margin-top: 0.33rem;
+      margin-left: initial;
+    }
   }
 `;
 
