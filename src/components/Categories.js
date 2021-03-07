@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const categories = [
   { name: 'all', text: '전체보기' },
@@ -16,6 +16,7 @@ const CategoriesBlock = styled.div`
   padding: 1rem;
   width: 768px;
   margin: 0 auto;
+
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
@@ -29,19 +30,38 @@ const Category = styled.div`
   text-decoration: none;
   color: inherit;
   padding-bottom: 0.25rem;
+
   &:hover {
     color: #495057;
   }
+
+  ${(props) =>
+    props.active &&
+    css`
+      font-weight: 600;
+      border-bottom: 2px solid #22b8cf;
+      color: #22b8cf;
+      &:hover {
+        color: #3bc9db;
+      }
+    `}
+
   & + & {
     margin-left: 1rem;
   }
 `;
 
-const Categories = () => {
+const Categories = ({ category, onSelect }) => {
   return (
     <CategoriesBlock>
       {categories.map((c) => (
-        <Category key={c.name}>{c.text}</Category>
+        <Category
+          key={c.name}
+          active={category === c.name}
+          onClick={() => onSelect(c.name)}
+        >
+          {c.text}
+        </Category>
       ))}
     </CategoriesBlock>
   );
